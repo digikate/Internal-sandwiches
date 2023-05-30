@@ -1,0 +1,12 @@
+# mac system files
+*.DS_store
+
+# pychram files
+.idea
+
+__pycache__
+
+venv
+
+# big video files
+.mov
