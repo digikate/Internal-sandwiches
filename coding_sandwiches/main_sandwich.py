@@ -13,13 +13,18 @@ def get_string(m):
     my_string = input(m)
     return my_string
 
-def order(O):
-        c = get_integer("How many sandwiches would you like to order?")
-        i = 0
-        while i < c:
-            my_order = get_string("Please enter the index number of the sandwich you would like to order:")
-            O.append(my_order)
-            i += 1
+def order(O,M):
+    print("-" * 80)
+    print_menu(M)
+    print("-" * 80)
+    index_num = get_integer("Please enter the number of the sandwich you would like:")
+    sand_num = get_integer("Please enter how many of this sandwich you would like:")
+    output = "You have ordered the {} of the {}".format(sand_num,M[index_num][0])
+    print(output)
+    temp = [M[index_num][0], M[index_num][1], sand_num]
+    O.append(temp)
+
+
 def input_action():
     my_input = input("Please choose an option").upper()
     return my_input
@@ -61,7 +66,7 @@ def main():
         if user_choice == "P":
             print_menu(my_list)
         elif user_choice == "O":
-            order(my_order)
+            order(my_order, my_list)
         elif user_choice == "Q":
             run = False
             print("Thank you for visiting Marsden Gourmet Sandwich Bar")
