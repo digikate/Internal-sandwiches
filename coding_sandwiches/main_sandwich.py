@@ -25,8 +25,18 @@ def order(O,M):
     O.append(temp)
 
 
+def review(O):
+    total = 0
+    for i in range(0, len(O)):
+        sub_total = O[i][2]*O[i][1]
+        total += sub_total
+        order_item = "x{:<5} {:<40} @ ${:5.2f} each = ${:5.2f} ".format(O[i][2], O[i][0], O[i][1], sub_total )
+        print(order_item)
+    output= "{:>64}${:5.2f}".format("Total = ", total)
+    print(output)
+
 def input_action():
-    my_input = input("Please choose an option").upper()
+    my_input = input("Please choose an option: -> ").upper()
     return my_input
 
 
@@ -37,6 +47,11 @@ def print_menu(M):
     return None
 
 def main():
+    my_order = []
+    my_order = [
+        ["Roasted Beetroot Sandwich", 14, 3],
+        ["Jalapeño and Cheddar Sandwich", 15, 7]
+    ]
     # sandwiches list lives here
     my_list = [
         ["Halloumi Sandwich", 16],
@@ -52,11 +67,10 @@ def main():
         ["Jalapeño and Cheddar Sandwich", 15]
     ]
 
-    my_order = []
-
     my_menu = '''
     P : Print menu
     O : Order
+    R : Review
     Q : Quit
     '''
     run = True
@@ -67,6 +81,8 @@ def main():
             print_menu(my_list)
         elif user_choice == "O":
             order(my_order, my_list)
+        elif user_choice == "R":
+            review(my_order)
         elif user_choice == "Q":
             run = False
             print("Thank you for visiting Marsden Gourmet Sandwich Bar")
