@@ -17,8 +17,8 @@ def order(O,M):
     print("-" * 80)
     print_menu(M)
     print("-" * 80)
-    index_num = get_integer("Please enter the number of the sandwich you would like:")
-    sand_num = get_integer("Please enter how many of this sandwich you would like:")
+    index_num = get_integer("Please enter the number of the sandwich you would like: -> ")
+    sand_num = get_integer("Please enter how many of this sandwich you would like: -> ")
     output = "You have ordered the {} of the {}".format(sand_num,M[index_num][0])
     print(output)
     temp = [M[index_num][0], M[index_num][1], sand_num]
@@ -27,13 +27,29 @@ def order(O,M):
 
 def review(O):
     total = 0
+    print("-" * 80)
     for i in range(0, len(O)):
         sub_total = O[i][2]*O[i][1]
         total += sub_total
         order_item = "x{:<5} {:<40} @ ${:5.2f} each = ${:5.2f} ".format(O[i][2], O[i][0], O[i][1], sub_total )
         print(order_item)
     output= "{:>64}${:5.2f}".format("Total = ", total)
+    print("-" * 80)
     print(output)
+    print("-" * 80)
+
+def edit_order(O):
+    for i in range(0, len(O)):
+        output = "{}: {:<40} x{}".format(i,O[i][0], O[i][2])
+        print(output)
+    print(O)
+    my_index = get_integer("Please enter the index number to update the amount of this sandwich you would like: ->")
+    new_amount = get_integer("Enter the new number of this sandwich you would like: ->")
+    old_amount = O[my_index][2]
+    O[my_index][2] = new_amount
+    output_message = "{} has now been changed to {}.". format(old_amount, new_amount)
+    print(output_message)
+
 
 def input_action():
     my_input = input("Please choose an option: -> ").upper()
@@ -49,6 +65,7 @@ def print_menu(M):
 def main():
     my_order = []
     my_order = [
+        # name , price , quantity
         ["Roasted Beetroot Sandwich", 14, 3],
         ["Jalapeño and Cheddar Sandwich", 15, 7]
     ]
@@ -67,15 +84,17 @@ def main():
         ["Jalapeño and Cheddar Sandwich", 15]
     ]
 
-    my_menu = '''
-    P : Print menu
-    O : Order
-    R : Review
-    Q : Quit
-    '''
+
+    my_menu=['P : Print menu',
+             'O : Order',
+             'R : Review',
+             'E : Edit order',
+             'Q : Quit'
+             ]
     run = True
     while run is True:
-        print(my_menu)
+        for m in my_menu:
+            print(m)
         user_choice = input_action()
         if user_choice == "P":
             print_menu(my_list)
@@ -83,6 +102,8 @@ def main():
             order(my_order, my_list)
         elif user_choice == "R":
             review(my_order)
+        elif user_choice == "E":
+            edit_order(my_order)
         elif user_choice == "Q":
             run = False
             print("Thank you for visiting Marsden Gourmet Sandwich Bar")
