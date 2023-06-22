@@ -100,12 +100,17 @@ then the program will print a list of all the sandwiches that the customer has o
 
 
 <h1>Sprint 3</h1>
-<h3>Aim: Adding a edit order option to menu and </h3>
+<h3>Aim: Adding a edit order option to menu (customer is able to change how many sandwiches they ordered and delete any from their order)
+	and also have an option on the menu to have their order delivered (which adds an extra $3 to their total cost) or pick it up which is free of charge.</h3>
 <h3>Basic program plan</h3>
 <h3>Sprint 3 Board in Progress</h3>
 <h3>Basic Test of Program</h3>
 <h3>Sprint Reflection</h3>
-<p>- </p>
+<p>This third sprint has another 2 options on the menu that lets them edit their order and to choose pick up or delivery for their order. I had a problem with the edit order
+function when I first tested and made it. When I first tried to make it so that an item would delete if the customer enter 0, I (.pop)ed the item in the my_order list, so when i tried
+to print out a message that notified the customer of what sandwich they just deleted, it wouldn't work because in the .format part of the message telling the code what to input, in the {},
+it no longer had that value as that sandwich had already been deleted. So, to solve this I set sandwich_name to the index number and 0 (which is the place in the list the sandwich name was),
+so the code still had the information of what sandwich had been deleted. This allowed me to put sandwich_name in the formatting and therefore allowed me to print out a confirmation message for the customer.</p>
 				<h3>Github Push</h3>
 
 <hr>

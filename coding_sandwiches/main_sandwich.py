@@ -31,24 +31,52 @@ def review(O):
     for i in range(0, len(O)):
         sub_total = O[i][2]*O[i][1]
         total += sub_total
-        order_item = "x{:<5} {:<40} @ ${:5.2f} each = ${:5.2f} ".format(O[i][2], O[i][0], O[i][1], sub_total )
+        order_item = "x{:<5} {:<40} @ ${:5.2f} each = ${:5.2f} ".format(O[i][2], O[i][0], O[i][1], sub_total)
         print(order_item)
-    output= "{:>64}${:5.2f}".format("Total = ", total)
+    output = "{:>64}${:5.2f}".format("Total = ", total)
     print("-" * 80)
     print(output)
     print("-" * 80)
 
 def edit_order(O):
+    print("-" * 80)
     for i in range(0, len(O)):
-        output = "{}: {:<40} x{}".format(i,O[i][0], O[i][2])
+        output = "{}: {:<40} x{}".format(i, O[i][0], O[i][2])
         print(output)
-    print(O)
-    my_index = get_integer("Please enter the index number to update the amount of this sandwich you would like: ->")
-    new_amount = get_integer("Enter the new number of this sandwich you would like: ->")
+    print("-" * 80)
+    my_index = get_integer("Please enter the index number to update the amount of this sandwich you would like: -> ")
+    new_amount = get_integer("Enter the new number of this sandwich you would like: -> ")
     old_amount = O[my_index][2]
     O[my_index][2] = new_amount
-    output_message = "{} has now been changed to {}.". format(old_amount, new_amount)
+    output_message = "{} has now been changed to {}.".format(old_amount, new_amount)
     print(output_message)
+    if new_amount == 0:
+        sandwich_name = O[my_index][0]
+        O.pop(my_index)
+        delete_message = "{} has been removed from your order". format(sandwich_name)
+        print(delete_message)
+
+def transport(O):
+    deliver = get_string("Enter 'P' to pick up your order, to get your order delivered enter 'D': -> ")
+    if deliver == "P":
+        message = "Pick up is free, we'll see you in store later"
+        print(message)
+    elif deliver == "D":
+        d_message = "Delivery is an extra $3 charge, this will automatically be added to your order total"
+        print(d_message)
+        total = 0
+        print("-" * 80)
+        for i in range(0, len(O)):
+            sub_total = O[i][2] * O[i][1]
+            total += sub_total
+            order_item = "x{:<5} {:<40} @ ${:5.2f} each = ${:5.2f} ".format(O[i][2], O[i][0], O[i][1], sub_total)
+            delivery = "{:>64}$3.00". format("Delivery Fee = ")
+            print(order_item)
+        print(delivery)
+        output = "{:>64}${:5.2f}".format("Total = ", total + 3)
+        print("-" * 80)
+        print(output)
+        print("-" * 80)
 
 
 def input_action():
@@ -70,6 +98,7 @@ def main():
         ["Jalapeño and Cheddar Sandwich", 15, 7]
     ]
     # sandwiches list lives here
+
     my_list = [
         ["Halloumi Sandwich", 16],
         ["Pork Banh Mi", 19],
@@ -89,8 +118,10 @@ def main():
              'O : Order',
              'R : Review',
              'E : Edit order',
+             'T : Pick up or delivery',
              'Q : Quit'
              ]
+
     run = True
     while run is True:
         for m in my_menu:
@@ -104,6 +135,8 @@ def main():
             review(my_order)
         elif user_choice == "E":
             edit_order(my_order)
+        elif user_choice == "T":
+            transport(my_order)
         elif user_choice == "Q":
             run = False
             print("Thank you for visiting Marsden Gourmet Sandwich Bar")
