@@ -9,6 +9,14 @@ def get_integer(m):
         get_result = False
     return my_integer
 
+
+def confirmation(m):
+    while True:
+        choice = input(m).upper()
+        if choice not in ['Y','N']:
+            print("Please enter Y or N")
+        else:
+            return choice
 def get_string(m):
     my_string = input(m)
     return my_string
@@ -22,7 +30,7 @@ def order(O,M):
     output = "You have ordered the {} of the {}".format(sand_num,M[index_num][0])
     print(output)
     temp = [M[index_num][0], M[index_num][1], sand_num]
-    O.append(temp)
+    O.insert(0, temp)
 
 
 def review(O):
@@ -37,6 +45,9 @@ def review(O):
     print("-" * 80)
     print(output)
     print("-" * 80)
+    # print customer details
+
+
 
 def edit_order(O):
     print("-" * 80)
@@ -57,26 +68,42 @@ def edit_order(O):
         print(delete_message)
 
 def transport(O):
-    deliver = get_string("Enter 'P' to pick up your order, to get your order delivered enter 'D': -> ")
+    # get last item
+    last_item = O[-1]
+    if last_item[0] == "Delivery":
+        message = "You have already chosen delivery, do you want to change"
+        choice = confirmation(message)
+        if choice == "Y":
+            O.pop()
+        else:
+            return None
+    # check if it is delivery
+    # if it is ask user if they want to change
+    deliver = get_string("Enter 'P' to pick up your order, to get your order delivered enter 'D': -> ").upper()
+    # ask for customer name and phone number
+
+
+
+
     if deliver == "P":
         message = "Pick up is free, we'll see you in store later"
         print(message)
+        return None
     elif deliver == "D":
+        # showing the user the $3 has been added to their order
         d_message = "Delivery is an extra $3 charge, this will automatically be added to your order total"
+        # asl for address
         print(d_message)
+        O.append(["Delivery", 3, 1])
         total = 0
         print("-" * 80)
-        for i in range(0, len(O)):
-            sub_total = O[i][2] * O[i][1]
-            total += sub_total
-            order_item = "x{:<5} {:<40} @ ${:5.2f} each = ${:5.2f} ".format(O[i][2], O[i][0], O[i][1], sub_total)
-            delivery = "{:>64}$3.00". format("Delivery Fee = ")
-            print(order_item)
-        print(delivery)
-        output = "{:>64}${:5.2f}".format("Total = ", total + 3)
+        review(O)
         print("-" * 80)
-        print(output)
-        print("-" * 80)
+    # get customer details
+
+
+
+
 
 
 def input_action():
@@ -95,9 +122,12 @@ def main():
     my_order = [
         # name , price , quantity
         ["Roasted Beetroot Sandwich", 14, 3],
-        ["Jalapeño and Cheddar Sandwich", 15, 7]
+        ["Jalapeño and Cheddar Sandwich", 15, 7],
     ]
     # sandwiches list lives here
+    customer_details = []
+
+
 
     my_list = [
         ["Halloumi Sandwich", 16],
