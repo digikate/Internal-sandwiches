@@ -41,6 +41,7 @@ def review(O):
         total += sub_total
         order_item = "x{:<5} {:<40} @ ${:5.2f} each = ${:5.2f} ".format(O[i][2], O[i][0], O[i][1], sub_total)
         print(order_item)
+
     output = "{:>64}${:5.2f}".format("Total = ", total)
     print("-" * 80)
     print(output)
@@ -67,44 +68,47 @@ def edit_order(O):
         delete_message = "{} has been removed from your order". format(sandwich_name)
         print(delete_message)
 
-def transport(O):
+def details(O, C):
+    # test if details are already there
+
     # get last item
     last_item = O[-1]
     if last_item[0] == "Delivery":
-        message = "You have already chosen delivery, do you want to change"
+        # check if it is delivery
+        # if it is ask user if they want to change
+        message = "You have already chosen delivery, do you want to change (Y/N)"
         choice = confirmation(message)
         if choice == "Y":
             O.pop()
         else:
             return None
-    # check if it is delivery
-    # if it is ask user if they want to change
+
+    name = get_string("Please enter your name: --> ")
+    phone_number = get_integer("Please enter your phone number: --> ")
+    C.append(name)
+    C.append(phone_number)
+
     deliver = get_string("Enter 'P' to pick up your order, to get your order delivered enter 'D': -> ").upper()
-    # ask for customer name and phone number
-
-
-
 
     if deliver == "P":
         message = "Pick up is free, we'll see you in store later"
         print(message)
+        # ask for customer name and phone number
+        output = "Here are your details Name: {},   Phone number: {}".format(name, phone_number)
+        print(output)
         return None
     elif deliver == "D":
         # showing the user the $3 has been added to their order
         d_message = "Delivery is an extra $3 charge, this will automatically be added to your order total"
-        # asl for address
+        # ask for address
         print(d_message)
         O.append(["Delivery", 3, 1])
-        total = 0
-        print("-" * 80)
-        review(O)
-        print("-" * 80)
     # get customer details
-
-
-
-
-
+    # ask for customer name, phone number, address
+        address = get_string("Please enter an address for delivery: --> ")
+        C.append(address)
+        output = "Here are your details Name: {},   Phone number: {},   Address: {}". format(name, phone_number, address)
+        print(output)
 
 def input_action():
     my_input = input("Please choose an option: -> ").upper()
@@ -117,6 +121,7 @@ def print_menu(M):
         print(output)
     return None
 
+
 def main():
     my_order = []
     my_order = [
@@ -124,10 +129,10 @@ def main():
         ["Roasted Beetroot Sandwich", 14, 3],
         ["Jalapeño and Cheddar Sandwich", 15, 7],
     ]
-    # sandwiches list lives here
+    # Name, phone number, address
     customer_details = []
 
-
+    # sandwiches list lives here
 
     my_list = [
         ["Halloumi Sandwich", 16],
@@ -148,12 +153,17 @@ def main():
              'O : Order',
              'R : Review',
              'E : Edit order',
-             'T : Pick up or delivery',
+             'D : Details',
              'Q : Quit'
              ]
 
     run = True
+    new_order = True
     while run is True:
+        if new_order is True:
+            print("Starting new order")
+            new_order = False
+        print("-" * 80)
         for m in my_menu:
             print(m)
         user_choice = input_action()
@@ -165,8 +175,8 @@ def main():
             review(my_order)
         elif user_choice == "E":
             edit_order(my_order)
-        elif user_choice == "T":
-            transport(my_order)
+        elif user_choice == "D":
+            details(my_order, customer_details)
         elif user_choice == "Q":
             run = False
             print("Thank you for visiting Marsden Gourmet Sandwich Bar")

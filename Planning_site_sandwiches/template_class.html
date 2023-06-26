@@ -103,8 +103,16 @@ then the program will print a list of all the sandwiches that the customer has o
 <h3>Aim: Adding a edit order option to menu (customer is able to change how many sandwiches they ordered and delete any from their order)
 	and also have an option on the menu to have their order delivered (which adds an extra $3 to their total cost) or pick it up which is free of charge.</h3>
 <h3>Basic program plan</h3>
+
 <h3>Sprint 3 Board in Progress</h3>
+<img class="img-responsive" src="assets/img/sprint3board.png" alt="sprint 3 board">
 <h3>Basic Test of Program</h3>
+<img class="img-responsive" src="assets/img/sp3test.png" alt="sprint 3 test">
+<h3>Errors</h3>
+				<img class="img-responsive" src="assets/img/sp3error.png" alt="sprint 3 test">
+				<img class="img-responsive" src="assets/img/S3error.png" alt="sprint 3 test">
+
+
 <h3>Sprint Reflection</h3>
 <p>This third sprint has another 2 options on the menu that lets them edit their order and to choose pick up or delivery for their order. I had a problem with the edit order
 function when I first tested and made it. When I first tried to make it so that an item would delete if the customer enter 0, I (.pop)ed the item in the my_order list, so when i tried
@@ -113,8 +121,13 @@ it no longer had that value as that sandwich had already been deleted. So, to so
 so the code still had the information of what sandwich had been deleted. This allowed me to put sandwich_name in the formatting and therefore allowed me to print out a confirmation message for the customer.
 Also, for functionality I had to change my first design of printing the confirmation of a delivery and adding $3 to the total. This is because in the transport(O) function I printed a review showing
 the $3 added on to the whole order but this is very similar to my review() function. So, I put my delivery fee in my review function so it prints out when the customer chooses the review option. So on the delivery
-function it only prints out a message saying that a $3 charge will be added to their order when they choose delivery rather than pick up (which is free so nothing happens). </p>
+function it only prints out a message saying that a $3 charge will be added to their order when they choose delivery rather than pick up (which is free so nothing happens). When I tried to do this
+I ran into many problems, such as the user not being able to change their mind about getting a delivery as the delivery value would still stay on their bill even though they chose 'P' after they chose 'D'.
+So I created a new confirmation function to use for any confirmations in any inputs, I just had to write a message of confirmation and the user can answer 'Y/N'. Before integrating this function, I tested it on my
+sandwich_testing file, which is separate from my main code file in order to avoid any drastic errors.</p>
+
 				<h3>Github Push</h3>
+				<img class="img-responsive" src="assets/img/sp3commit.png" alt="sprint 3 test">
 
 <hr>
 <h1>Sprint 4</h1>
@@ -123,13 +136,15 @@ function it only prints out a message saying that a $3 charge will be added to t
 <h3>Sprint 4 Board in Progress</h3>
 <h3>Basic Test of Program</h3>
 <h3>Sprint Reflection</h3>
-<p>- </p>
+<p>This sprint should be able to collect customer information like their name, their phone number and their address. This sprint should also have an option for the
+customer to view descriptions of the sandwiches. I ran into an error when trying to .insert the customer information that was collected into the customer_details list, as only
+So I had to</p>
 				<h3>Github Push</h3>
 
 <hr>
 
 <h1>Sprint 5</h1>
-<h3>Aim: Create a basic menu that allows customer to print the menu and quit</h3>
+<h3>Aim: Customer can create their own custom sandwich. They can choose what bun they would like, what meat they want and 3 optional toppings.</h3>
 <h3>Basic program plan</h3>
 <h3>Sprint 5 Board in Progress</h3>
 <h3>Basic Test of Program</h3>
