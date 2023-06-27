@@ -9,6 +9,9 @@ def get_integer(m):
         get_result = False
     return my_integer
 
+def get_string(m):
+    my_string = input(m)
+    return my_string
 
 def confirmation(m):
     while True:
@@ -17,9 +20,12 @@ def confirmation(m):
             print("Please enter Y or N")
         else:
             return choice
-def get_string(m):
-    my_string = input(m)
-    return my_string
+
+def print_menu(M):
+    for i in range(0, len(M)):
+        output = "{}: {:<40} ${:.2f}".format(i,M[i][0], M[i][1])
+        print(output)
+    return None
 
 def order(O,M):
     print("-" * 80)
@@ -33,7 +39,7 @@ def order(O,M):
     O.insert(0, temp)
 
 
-def review(O):
+def review(O,C):
     total = 0
     print("-" * 80)
     for i in range(0, len(O)):
@@ -47,6 +53,16 @@ def review(O):
     print(output)
     print("-" * 80)
     # print customer details
+    last_item = O[-1]
+    if last_item[0] == "Delivery":
+        customer_details = "Name: {}, Phone Number: {}, Address: {}".format(C[0], C[1], C[2])
+        print(customer_details)
+    elif last_item[0] != "Delivery":
+        details = "Name: {}, Phone Number: {}".format(C[0], C[1])
+        print(details)
+
+
+
 
 
 
@@ -70,18 +86,18 @@ def edit_order(O):
 
 def details(O, C):
     # test if details are already there
-
-    # get last item
-    last_item = O[-1]
-    if last_item[0] == "Delivery":
-        # check if it is delivery
-        # if it is ask user if they want to change
-        message = "You have already chosen delivery, do you want to change (Y/N)"
+    if len(C) != 0:
+        message = "You have already entered details, do you want to enter them again (Y/N)? --> ".upper()
         choice = confirmation(message)
         if choice == "Y":
-            O.pop()
-        else:
+            C.clear()
+            last_item = O[-1]
+            if last_item[0] == "Delivery":
+                O.pop()
+        elif choice == "N":
             return None
+        else:
+            output = "Please enter a valid answer"
 
     name = get_string("Please enter your name: --> ")
     phone_number = get_integer("Please enter your phone number: --> ")
@@ -110,16 +126,15 @@ def details(O, C):
         output = "Here are your details Name: {},   Phone number: {},   Address: {}". format(name, phone_number, address)
         print(output)
 
+
+
+
+
+
 def input_action():
     my_input = input("Please choose an option: -> ").upper()
     return my_input
 
-
-def print_menu(M):
-    for i in range(0, len(M)):
-        output = "{}: {:<40} ${:.2f}".format(i,M[i][0], M[i][1])
-        print(output)
-    return None
 
 
 def main():
@@ -172,7 +187,7 @@ def main():
         elif user_choice == "O":
             order(my_order, my_list)
         elif user_choice == "R":
-            review(my_order)
+            review(my_order, customer_details)
         elif user_choice == "E":
             edit_order(my_order)
         elif user_choice == "D":
