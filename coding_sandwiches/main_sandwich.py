@@ -10,27 +10,29 @@ def get_integer(m):
     return my_integer
 
 def get_string(m):
-    my_string = input(m)
+    my_string = input(m).upper()
     return my_string
 
-def confirmation(m):
+def confirmation(m, chars=['Y','N'] ):
     while True:
         choice = input(m).upper()
-        if choice not in ['Y','N']:
-            print("Please enter Y or N")
+        if choice not in chars:
+            print( "Please enter {}".format(' or '.join(chars) ) )
         else:
             return choice
 
+
+
 def print_menu(M):
+    print("-" * 80)
     for i in range(0, len(M)):
         output = "{}: {:<40} ${:.2f}".format(i,M[i][0], M[i][1])
         print(output)
+    print("-" * 80)
     return None
 
 def order(O,M):
-    print("-" * 80)
     print_menu(M)
-    print("-" * 80)
     index_num = get_integer("Please enter the number of the sandwich you would like: -> ")
     sand_num = get_integer("Please enter how many of this sandwich you would like: -> ")
     output = "You have ordered the {} of the {}".format(sand_num,M[index_num][0])
@@ -52,15 +54,20 @@ def review(O,C):
     print("-" * 80)
     print(output)
     print("-" * 80)
+    print("Customer details")
     # print customer details
-    last_item = O[-1]
-    if last_item[0] == "Delivery":
-        customer_details = "Name: {}, Phone Number: {}, Address: {}".format(C[0], C[1], C[2])
-        print(customer_details)
-    elif last_item[0] != "Delivery":
-        details = "Name: {}, Phone Number: {}".format(C[0], C[1])
-        print(details)
-
+    if len(C) == 0:
+        message = "You have not yet entered any customer details"
+        print(message)
+    else:
+        last_item = O[-1]
+        if last_item[0] == "Delivery":
+            customer_details = "Delivery for - Name: {}, Phone Number: {}, Address: {}".format(C[0], C[1], C[2])
+            print(customer_details)
+        elif last_item[0] != "Delivery":
+            details = "Pick up for - Name: {}, Phone Number: {} ".format(C[0], C[1])
+            print(details)
+    print("-" * 80)
 
 
 
@@ -87,7 +94,7 @@ def edit_order(O):
 def details(O, C):
     # test if details are already there
     if len(C) != 0:
-        message = "You have already entered details, do you want to enter them again (Y/N)? --> ".upper()
+        message = "You have already entered details, do you want to enter them again (Y/N)? --> "
         choice = confirmation(message)
         if choice == "Y":
             C.clear()
@@ -96,21 +103,20 @@ def details(O, C):
                 O.pop()
         elif choice == "N":
             return None
-        else:
-            output = "Please enter a valid answer"
 
-    name = get_string("Please enter your name: --> ")
+
+    name = input("Please enter your name: --> ")
     phone_number = get_integer("Please enter your phone number: --> ")
     C.append(name)
     C.append(phone_number)
-
-    deliver = get_string("Enter 'P' to pick up your order, to get your order delivered enter 'D': -> ").upper()
+    message = "Enter 'P' to pick up your order, to get your order delivered enter 'D': -> "
+    deliver = confirmation(message, ["P","D"])
 
     if deliver == "P":
         message = "Pick up is free, we'll see you in store later"
         print(message)
         # ask for customer name and phone number
-        output = "Here are your details Name: {},   Phone number: {}".format(name, phone_number)
+        output = "Here are your details - Name: {},   Phone number: {}".format(name, phone_number)
         print(output)
         return None
     elif deliver == "D":
@@ -121,18 +127,27 @@ def details(O, C):
         O.append(["Delivery", 3, 1])
     # get customer details
     # ask for customer name, phone number, address
-        address = get_string("Please enter an address for delivery: --> ")
+        address = input("Please enter an address for delivery: --> ")
         C.append(address)
-        output = "Here are your details Name: {},   Phone number: {},   Address: {}". format(name, phone_number, address)
+        output = "Here are your details - Name: {},   Phone number: {},   Address: {}". format(name, phone_number, address)
         print(output)
+    else:
+        return deliver
 
 
-
-
-
+def confirm_order(O,C):
+    review(O,C)
+    confirm = get_string("Would you like the confirm your order (Y/N)? --> ")
+    if confirm == "Y":
+        print("Your order has been confirmed, thank you for being a customer at Marsden's Gourmet Sandwich Bar. ")
+        # clearing next lists so that the next time the option menu shows it's starting a new order
+        O.clear()
+        C.clear()
+    elif confirm == "N":
+        return None
 
 def input_action():
-    my_input = input("Please choose an option: -> ").upper()
+    my_input = get_string("Please choose an option: -> ")
     return my_input
 
 
@@ -169,6 +184,7 @@ def main():
              'R : Review',
              'E : Edit order',
              'D : Details',
+             'C : Confirm order',
              'Q : Quit'
              ]
 
@@ -192,9 +208,11 @@ def main():
             edit_order(my_order)
         elif user_choice == "D":
             details(my_order, customer_details)
+        elif user_choice == "C":
+            confirm_order(my_order, customer_details)
         elif user_choice == "Q":
             run = False
-            print("Thank you for visiting Marsden Gourmet Sandwich Bar")
+            print("Thank you for visiting Marsden's Gourmet Sandwich Bar")
         else:
             print("Unrecognised entry, this is not an option")
 
