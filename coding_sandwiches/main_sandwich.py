@@ -1,3 +1,5 @@
+"""Sandwiches ordering program"""
+
 def get_integer(m):
     get_result = True
     while get_result:
@@ -13,14 +15,21 @@ def get_string(m):
     my_string = input(m).upper()
     return my_string
 
+
+
 def confirmation(m, chars=['Y','N'] ):
+    """Get specified character input.
+
+    :param m: string (message)
+    :param chars: list (allowed characters)
+    :return: string (1 character)
+    """
     while True:
         choice = input(m).upper()
         if choice not in chars:
             print( "Please enter {}".format(' or '.join(chars) ) )
         else:
             return choice
-
 
 
 def print_menu(M):

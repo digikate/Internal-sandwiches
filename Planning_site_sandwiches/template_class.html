@@ -19,6 +19,28 @@
 		<!-- Override CSS file - add your own CSS rules -->
 		<link rel="stylesheet" href="assets/css/styles.css">
 
+		<style>
+         .img-responsive{
+        max-width: 90%;
+        display: block;
+        box-sizing: border-box;
+        margin:auto;
+        margin-top: 1.2em;
+             margin-bottom: 1.2em
+    }
+
+    .column1{
+        float: left;
+        width: 50%;
+        box-sizing: border-box;
+    }
+
+    .column2{
+        float: left;
+        width: 50%;
+        box-sizing: border-box;
+    }
+        </style>
 	</head>
 	<body>
 		<div class="container">
@@ -27,11 +49,11 @@
 			</div>
 			<div class="nav-bar">
 				<ul class="nav">
-					<li><a href="#">Sprint 1</a></li>
-					<li><a href="#">Sprint 2</a></li>
-					<li><a href="#">Sprint 3</a></li>
-					<li><a href="#">Sprint 4</a></li>
-					<li><a href="#">Sprint 5</a></li>
+					<li><a href="#s1">Sprint 1</a></li>
+					<li><a href="#s2">Sprint 2</a></li>
+					<li><a href="#s3">Sprint 3</a></li>
+					<li><a href="#s4">Sprint 4</a></li>
+					<li><a href="#s5">Sprint 5</a></li>
 				</ul>
 			</div>
 			<div class="content">
@@ -47,7 +69,7 @@
 <h1>Project Backlog</h1>
 
 
-<h1>Sprint 1</h1>
+<h1 id = s1>Sprint 1</h1>
 <h3>Aim: Create a basic menu that allows customer to print the menu and quit</h3>
 <h3>Basic program plan</h3>
 <img class="img-responsive" src="assets/img/planning1.png" alt="sprint 1 board">
@@ -70,12 +92,13 @@
 	I had an error when trying to format my_list when I moved my_list to main(), this did not work out as I got an error when trying
 	to print out the list with the formatting.
 </p>
-				<h3>Github Push</h3>
 <hr>
 
-<h1>Sprint 2</h1>
+<h1 id = s2>Sprint 2</h1>
 <h3>Aim: Adding sandwiches to the customer's order and the customer being able to review their order</h3>
 <h3>Basic program plan</h3>
+				<img class="img-responsive" src="assets/img/planning2.png" alt="sprint 2 board">
+
 				<p>Testing: While trying to test the review function, instead of needing to go through the whole ordering process
 				I had already inputted some sandwiches in my_order list so that I could immediately choose the review option to make sure
 				this function was being called and working properly. This aided the testing process by using a simple solution to help the
@@ -95,11 +118,12 @@ then the program will print a list of all the sandwiches that the customer has o
 	what sandwich they ordered and the price of the sandwich. It also prints the grand total by adding all the prices of how many and what sandwiches the
 	customer ordered. I have added get_string and get_integer functions as well to prevent errors in the future. </p>
 				<h3>Github Push</h3>
+				<img class="img-responsive" src="assets/img/sprint2gitcommit.png" alt="sprint 2 commit">
 
 <hr>
 
 
-<h1>Sprint 3</h1>
+<h1 id = s3>Sprint 3</h1>
 <h3>Aim: Adding a edit order option to menu (customer is able to change how many sandwiches they ordered and delete any from their order)
 	and also have an option on the menu to have their order delivered (which adds an extra $3 to their total cost) or pick it up which is free of charge.</h3>
 <h3>Basic program plan</h3>
@@ -130,11 +154,15 @@ sandwich_testing file, which is separate from my main code file in order to avoi
 				<img class="img-responsive" src="assets/img/sp3commit.png" alt="sprint 3 test">
 
 <hr>
-<h1>Sprint 4</h1>
+<h1 id = s4>Sprint 4</h1>
 <h3>Aim: Adding more functions to the option menu, the customer can enter their details and can confirm their order</h3>
 <h3>Basic program plan</h3>
+<img class="column1" src="assets/img/s4plan1.png" alt="sprint 4 plan 1">
+				<img class="column2" src="assets/img/s4plan2.png" alt="sprint 4 plan 2">
+
 
 <h3>Sprint 4 Board in Progress</h3>
+				<img class="img-responsive" src="assets/img/sprint4board.png" alt="sprint 4 board">
 
 
 <h3>Basic Test of Program</h3>
@@ -142,14 +170,20 @@ sandwich_testing file, which is separate from my main code file in order to avoi
 <p>This sprint should be able to collect customer information like their name, their phone number and their address. This sprint should also have an option for the
 customer to view descriptions of the sandwiches. I also ran into an error, when I developed my review function I wanted it to also print the customer information. Although, if a customer
 	has not yet entered their details then the index number C[0] is out of range because there is not yet anything in the customer_details list. So I had to develop the review function
-	even further and I decided to solve it with an 'if' - where it checked if the customer_details list was empty.
+	even further and I decided to solve it with an 'if' - where it checked if the customer_details list was empty. I ran into another error when testing the details function - since my delivery or
+	pick up input was not validated so if the customer entered something other that 'P' or 'D' the program would automatically go back to the main menu and didn't add pick up or delivery to the order.
+	I fixed this by developing my confirmation function and allowing it to adapt to whatever letters I chose to select. I ran into another problem regarding validation, but this time with my integer inputs.
+	In many of my integer inputs I ask them to input a index number,
 when </p>
+				<h3>Errors</h3>
+								<img class="img-responsive" src="assets/img/sp4error.png" alt="sprint 3 test">
+
 				<h3>Github Push</h3>
 
 <hr>
 
-<h1>Sprint 5</h1>
-<h3>Aim: Customer can create their own custom sandwich. They can choose what bun they would like, what meat they want and 3 optional toppings.</h3>
+<h1 id = s5>Sprint 5</h1>
+<h3>Aim: Add extras - validate phone number - clean up code - doc typing - commenting</h3>
 <h3>Basic program plan</h3>
 <h3>Sprint 5 Board in Progress</h3>
 <h3>Basic Test of Program</h3>
