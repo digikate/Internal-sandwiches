@@ -127,6 +127,7 @@ then the program will print a list of all the sandwiches that the customer has o
 <h3>Aim: Adding a edit order option to menu (customer is able to change how many sandwiches they ordered and delete any from their order)
 	and also have an option on the menu to have their order delivered (which adds an extra $3 to their total cost) or pick it up which is free of charge.</h3>
 <h3>Basic program plan</h3>
+				<img class="img-responsive" src="assets/img/sp3plan.png" alt="sprint 3 plan">
 
 <h3>Sprint 3 Board in Progress</h3>
 <img class="img-responsive" src="assets/img/sprint3board.png" alt="sprint 3 board">
@@ -173,7 +174,11 @@ customer to view descriptions of the sandwiches. I also ran into an error, when 
 	even further and I decided to solve it with an 'if' - where it checked if the customer_details list was empty. I ran into another error when testing the details function - since my delivery or
 	pick up input was not validated so if the customer entered something other that 'P' or 'D' the program would automatically go back to the main menu and didn't add pick up or delivery to the order.
 	I fixed this by developing my confirmation function and allowing it to adapt to whatever letters I chose to select. I ran into another problem regarding validation, but this time with my integer inputs.
-	In many of my integer inputs I ask them to input a index number,
+	In many of my integer inputs I ask them to input a index number, so I had to create validation for this as the user could enter a number that is not in the range of the list indexes. I did this by
+	creating a separate function where their inputs were checked to see if it was lower that the smallest number or higher that the largest number. Then, everytime I asked
+	for an index number input, I would call this function which worked in the favour of functionality and future proofing as well because if I needed to change the code for this
+	validation, I'd only have to change it once in the main index number validation function rather than having lots of separate chunks of code to have to change which would make it messy
+	and not easy to read.
 when </p>
 				<h3>Errors</h3>
 								<img class="img-responsive" src="assets/img/sp4error.png" alt="sprint 3 test">
@@ -183,7 +188,7 @@ when </p>
 <hr>
 
 <h1 id = s5>Sprint 5</h1>
-<h3>Aim: Add extras - validate phone number - clean up code - doc typing - commenting</h3>
+<h3>Aim: polishing off the code: Add extras - validate phone number - doc typing - commenting</h3>
 <h3>Basic program plan</h3>
 <h3>Sprint 5 Board in Progress</h3>
 <h3>Basic Test of Program</h3>
