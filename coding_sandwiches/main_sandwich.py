@@ -6,18 +6,22 @@ def phone_integer(m):
     """validating that the phone number is only integers
 
     :param m: string (message)
-    :return: integer (multiple)
+    :return: integer (multiple - my_phone)
     """
     # validating for an integer for the phone number input
-    my_integer = 0
+    my_phone = 0
     get_result = True
     while get_result:
         my_phone = input(m)
         if not my_phone.isdigit():
             print("Please enter only numbers")
             continue
+        elif len(my_phone) < 6 or len(my_phone) > 12:
+            print("Phone should be between 6 and 8 digits")
+            continue
+
         get_result = False
-    return my_integer
+    return my_phone
 
 def get_integer(m, lower, upper):
     # doc - typing
@@ -54,7 +58,7 @@ def get_string(m):
 
 
 
-def confirmation(m, chars=['Y','N'] ):
+def confirmation(m, chars = ['Y','N'] ):
     # doc - typing
     """Get specified character input.
 
@@ -69,6 +73,7 @@ def confirmation(m, chars=['Y','N'] ):
             print("Please enter {}".format(' or '.join(chars)))
         else:
             return choice
+
 
 
 def print_menu(M):
@@ -93,7 +98,7 @@ def order(O,M, lower, upper):
     :param M: list (menu)
     :param lower: integer (lowest index)
     :param upper: integer (highest index)
-    :return:
+    :return: None
     """
 
     # asking user for integer inputs that correlate to the sandwich index numbers
@@ -106,6 +111,7 @@ def order(O,M, lower, upper):
     # adding the information above into a temporary list, to insert this information into the master list
     temp = [M[index_num][0], M[index_num][1], sand_num]
     O.insert(0, temp)
+    return None
 
 
 def review(O,C):
@@ -113,7 +119,7 @@ def review(O,C):
     """reviewing the customer's whole order
     :param O: list (my_order)
     :param C: list (string and integer mixed) - (customer_details)
-    :return:
+    :return: None
     """
     # function that allows the user to review their order
     # setting the total to 0 so the total amount due is added onto the total everytime
@@ -144,6 +150,7 @@ def review(O,C):
             details = "Pick up for - Name: {}, Phone Number: {} ".format(C[0], C[1])
             print(details)
     print("-" * 80)
+    return None
 
 
 
@@ -155,7 +162,7 @@ def edit_order(O, lower, upper):
     :param O: list (my_order)
     :param lower: integer (lowest index)
     :param upper: integer (highest index)
-    :return:
+    :return: None
     """
     # function that allows the user to edit their order
     print("-" * 80)
@@ -165,11 +172,11 @@ def edit_order(O, lower, upper):
         print(output)
     print("-" * 80)
     # asking for what sandwich they'd like to edit
-    m = "Please enter the index number to update the amount of this sandwich you would like: -> "
+    m = "Please enter the index number to update the amount of this sandwich/extra you would like: -> "
     my_index = get_integer(m, lower, upper)
-    print("* To remove a sandwich completely, you can enter 0 for the next question")
+    print("* To remove a sandwich/extra completely, you can enter 0 for the next question")
     # asking user the new amount they would like
-    new_amount = int(input("Enter the new number of this sandwich you would like: -> "))
+    new_amount = int(input("Enter the new number of this item you would like: -> "))
     old_amount = O[my_index][2]
     O[my_index][2] = new_amount
     # confirming/ letting the user know what has been replaced - the new changes
@@ -180,6 +187,7 @@ def edit_order(O, lower, upper):
         O.pop(my_index)
         delete_message = "{} has been removed from your order". format(sandwich_name)
         print(delete_message)
+        return None
 
 
 def details(O, C):
@@ -187,7 +195,7 @@ def details(O, C):
     """gathering the data inputs of the customer details to print on receipt
     :param O: list (my_order)
     :param C: list ((string and integers) - (customer_details)
-    :return: none and deliver
+    :return: None and character (1 - "P" or "D")
     """
     # test if details are already there
     if len(C) != 0:
@@ -236,8 +244,8 @@ def details(O, C):
 def extras(E):
     # doc - typing
     """
-    :param A: list (menu)
-    :return: none
+    :param E: list (extras)
+    :return: None
     """
     # printing the sandwich menu
     print("-" * 80)
@@ -265,11 +273,12 @@ def confirm_order(O,C):
     """confirming the order so the next user can start a new one (clears all lists from previously asked inputs)
     :param O: list (my_order)
     :param C: list (string and integers) - (customer_details)
-    :return: none
+    :return: None
     """
     # basically printing a full receipt
     review(O,C)
-    confirm = get_string("Would you like the confirm your order (Y/N)? --> ")
+    message = "Would you like the confirm your order (Y/N)? --> "
+    confirm = confirmation(message)
     if confirm == "Y":
         print("Your order has been confirmed, thank you for being a customer at Marsden's Gourmet Sandwich Bar. ")
         # clearing next lists so that the next time the option menu shows it's starting a new order
@@ -281,7 +290,7 @@ def confirm_order(O,C):
 def input_action():
     # doc -typing
     """
-    :return: my_input (1 character)
+    :return: character (1 - "Y" or "N")
     """
     # getting the user input as to what they would like to do
     my_input = get_string("Please choose an option: -> ")
@@ -290,6 +299,9 @@ def input_action():
 
 
 def main():
+    """
+    :return: None
+    """
     # name , price , quantity
     my_order = []
 
@@ -303,7 +315,6 @@ def main():
         ["Roasted Beetroot Sandwich", 14],
         ["Sausage and Egg Sandwich", 15.5],
         ["Smoked Salmon Deluxe", 16],
-        ["Ham Sandwich", 14],
         ["Buttermilk Chicken Sandwich", 19],
         ["'Lucky Beef' Steak Sandwich", 19.5],
         ["Milanese and Gremolata Panini", 17],
@@ -362,5 +373,6 @@ def main():
             print("Thank you for visiting Marsden's Gourmet Sandwich Bar")
         else:
             print("Unrecognised entry, this is not an option")
+    return None
 
 main()

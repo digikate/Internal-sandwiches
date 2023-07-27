@@ -16,7 +16,7 @@ def confirmation(m, chars=['Y','N'] ):
     while True:
         choice = input(m).upper()
         if choice not in chars:
-            print( "Please enter {}".format(' or '.join(chars) ) )
+            print( "Please enter {}".format(' or '.join(chars)))
         else:
             return choice
 

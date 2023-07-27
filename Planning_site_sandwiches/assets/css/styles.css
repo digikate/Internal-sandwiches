@@ -177,6 +177,10 @@ Single styles
     margin: auto;
     max-width: 100%; }
 
+ .fifty{
+ width:50%;
+ }
+
 .btn
 {
 	color: #fff !important;
