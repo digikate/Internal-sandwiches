@@ -109,9 +109,9 @@ def order(O,M, lower, upper):
 
     # asking user for integer inputs that correlate to the sandwich index numbers
     print_menu(M)
-    m = "Please enter the number of the sandwich you would like: -> "
+    m = "Please enter the number of the sandwich you would like: --> "
     index_num = get_integer(m, lower, upper)
-    sand_num = get_integer("Please enter how many of this sandwich you would like (limit of 5 sandwiches): -> ", 0, 5)
+    sand_num = get_integer("Please enter how many of this sandwich you would like (limit of 5 sandwiches): --> ", 1, 5)
     output = "You have ordered the {} of the {}".format(sand_num,M[index_num][0])
     print(output)
     # adding the information above into a temporary list, to insert this information into the master list
@@ -178,11 +178,11 @@ def edit_order(O, lower, upper):
         print(output)
     print("-" * 80)
     # asking for what sandwich they'd like to edit
-    m = "Please enter the index number to update the amount of this sandwich/extra you would like: -> "
+    m = "Please enter the index number to update the amount of this sandwich/extra you would like: --> "
     my_index = get_integer(m, lower, upper)
     print("* To remove a sandwich/extra completely, you can enter 0 for the next question")
     # asking user the new amount they would like
-    new_amount = get_integer("Enter the new number of this item you would like: -> ", 0, 5)
+    new_amount = get_integer("Enter the new number of this item you would like: --> ", 0, 5)
     old_amount = O[my_index][2]
     O[my_index][2] = new_amount
     # confirming/ letting the user know what has been replaced - the new changes
@@ -222,7 +222,7 @@ def details(O, C):
     # adding these inputs into the customer_details list so it can be kept and printed out in the review function
     C.append(name)
     C.append(phone_number)
-    message = "Enter 'P' to pick up your order, to get your order delivered enter 'D': -> "
+    message = "Enter 'P' to pick up your order, to get your order delivered enter 'D': --> "
     deliver = confirmation(message, ["P","D"])
     # checking if they would like pick up or delivery
     if deliver == "P":
@@ -263,9 +263,9 @@ def extras(E):
     return None
 def add(E, O, lower, upper):
     extras(E)
-    a = "Please enter the number of the extra you would like: -> "
+    a = "Please enter the number of the extra you would like: --> "
     index_num = get_integer(a, lower, upper)
-    num = get_integer("Please enter how many servings of this extra you would like (limit is 5: -> ", 0,5)
+    num = get_integer("Please enter how many servings of this extra you would like (limit is 5): --> ", 1,5)
     output = "You have added {} of {} to your sandwich".format(num, E[index_num][0])
     print(output)
     # adding the information above into a temporary list, to insert this information into the master list
@@ -283,7 +283,7 @@ def confirm_order(O,C):
     """
     # basically printing a full receipt
     review(O,C)
-    message = "Would you like the confirm your order (Y/N)? --> "
+    message = "Would you like the confirm your order (enter 'y' for yes or 'n' for no)? --> "
     confirm = confirmation(message)
     if confirm == "Y":
         print("Your order has been confirmed, thank you for being a customer at Marsden's Gourmet Sandwich Bar. ")
@@ -299,7 +299,7 @@ def input_action():
     :return: character (options on menu)
     """
     # getting the user input as to what they would like to do
-    my_input = get_string("Please choose an option: -> ").upper()
+    my_input = get_string("Please choose an option: --> ").upper()
     return my_input
 
 
