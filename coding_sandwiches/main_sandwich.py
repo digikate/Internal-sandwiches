@@ -17,7 +17,7 @@ def phone_integer(m):
             print("Please enter only numbers")
             continue
         elif len(my_phone) < 6 or len(my_phone) > 12:
-            print("Phone should be between 6 and 8 digits")
+            print("Phone should be between 6 and 12 digits")
             continue
 
         get_result = False
@@ -53,7 +53,13 @@ def get_integer(m, lower, upper):
     return num
 
 def get_string(m):
-    my_string = input(m).upper()
+    getting_string = True
+    while getting_string is True:
+        my_string = input(m)
+        if my_string.isalpha():
+            getting_string = False
+        else:
+            print("Please enter only letters")
     return my_string
 
 
@@ -105,7 +111,7 @@ def order(O,M, lower, upper):
     print_menu(M)
     m = "Please enter the number of the sandwich you would like: -> "
     index_num = get_integer(m, lower, upper)
-    sand_num = int(input("Please enter how many of this sandwich you would like: -> "))
+    sand_num = get_integer("Please enter how many of this sandwich you would like (limit of 5 sandwiches): -> ", 0, 5)
     output = "You have ordered the {} of the {}".format(sand_num,M[index_num][0])
     print(output)
     # adding the information above into a temporary list, to insert this information into the master list
@@ -176,7 +182,7 @@ def edit_order(O, lower, upper):
     my_index = get_integer(m, lower, upper)
     print("* To remove a sandwich/extra completely, you can enter 0 for the next question")
     # asking user the new amount they would like
-    new_amount = int(input("Enter the new number of this item you would like: -> "))
+    new_amount = get_integer("Enter the new number of this item you would like: -> ", 0, 5)
     old_amount = O[my_index][2]
     O[my_index][2] = new_amount
     # confirming/ letting the user know what has been replaced - the new changes
@@ -210,7 +216,7 @@ def details(O, C):
             return None
 
     # asking the customer to input their details
-    name = (input("Please enter your name: --> "))
+    name = get_string("Please enter your name: --> ")
     m = "Please enter your phone number: --> "
     phone_number = phone_integer(m)
     # adding these inputs into the customer_details list so it can be kept and printed out in the review function
@@ -259,7 +265,7 @@ def add(E, O, lower, upper):
     extras(E)
     a = "Please enter the number of the extra you would like: -> "
     index_num = get_integer(a, lower, upper)
-    num = int(input("Please enter how many servings of this extra you would like: -> "))
+    num = get_integer("Please enter how many servings of this extra you would like (limit is 5: -> ", 0,5)
     output = "You have added {} of {} to your sandwich".format(num, E[index_num][0])
     print(output)
     # adding the information above into a temporary list, to insert this information into the master list
@@ -290,12 +296,11 @@ def confirm_order(O,C):
 def input_action():
     # doc -typing
     """
-    :return: character (1 - "Y" or "N")
+    :return: character (options on menu)
     """
     # getting the user input as to what they would like to do
-    my_input = get_string("Please choose an option: -> ")
+    my_input = get_string("Please choose an option: -> ").upper()
     return my_input
-
 
 
 def main():
