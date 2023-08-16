@@ -200,6 +200,15 @@ Single styles
 	text-decoration: none;
 }
 
+video{
+    max-height: 1000px;
+    max-width: 500px;
+    display: block;
+    margin: auto;
+    margin-bottom: 1em;
+    center;
+    }
+
 .btn:hover
 {
 	color: #fff !important;

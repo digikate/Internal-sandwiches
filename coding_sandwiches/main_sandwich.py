@@ -13,15 +13,18 @@ def phone_integer(m):
     get_result = True
     while get_result:
         my_phone = input(m)
+        # checking for digits (fix for having 0 at the start of the number)
+        # otherwise it won't print the 0
+
         if not my_phone.isdigit():
             print("Please enter only numbers")
             continue
         elif len(my_phone) < 6 or len(my_phone) > 12:
-            print("Phone should be between 6 and 12 digits")
+            print("Phone number should be between 6 and 12 digits")
             continue
-
         get_result = False
     return my_phone
+
 
 def get_integer(m, lower, upper):
     # doc - typing
@@ -32,7 +35,8 @@ def get_integer(m, lower, upper):
     :param upper: integer (largest index (len))
     :return: integer
     """
-    # validating integer inputs that have a specific range e.g for when I ask the customer to input an index number from an options list
+    # validating integer inputs that have a specific range
+    # e. g for when I ask the customer to input an index number from an options list
     num = 0
     getting_integer = True
     while getting_integer is True:
@@ -52,19 +56,20 @@ def get_integer(m, lower, upper):
             getting_integer = False
     return num
 
+
 def get_string(m):
+    # validating string functions
     getting_string = True
     while getting_string is True:
         my_string = input(m)
         if my_string.isalpha():
-            getting_string = False
+            # checking if it's only letters being inputted
+            return my_string
         else:
             print("Please enter only letters")
-    return my_string
 
 
-
-def confirmation(m, chars = ['Y','N'] ):
+def confirmation(m, chars=('Y', 'N')):
     # doc - typing
     """Get specified character input.
 
@@ -81,7 +86,6 @@ def confirmation(m, chars = ['Y','N'] ):
             return choice
 
 
-
 def print_menu(M):
     # doc - typing
     """
@@ -92,12 +96,13 @@ def print_menu(M):
     print("-" * 80)
     for i in range(0, len(M)):
         # formatting the sandwich menu
-        output = "{}: {:<40} ${:.2f}".format(i,M[i][0], M[i][1])
+        output = "{}: {:<40} ${:.2f}".format(i, M[i][0], M[i][1])
         print(output)
     print("-" * 80)
     return None
 
-def order(O,M, lower, upper):
+
+def order(O, M, lower, upper):
     # doc - typing
     """order function
     :param O: list (my_order)
@@ -110,9 +115,10 @@ def order(O,M, lower, upper):
     # asking user for integer inputs that correlate to the sandwich index numbers
     print_menu(M)
     m = "Please enter the number of the sandwich you would like: --> "
+    # setting up the list
     index_num = get_integer(m, lower, upper)
     sand_num = get_integer("Please enter how many of this sandwich you would like (limit of 5 sandwiches): --> ", 1, 5)
-    output = "You have ordered the {} of the {}".format(sand_num,M[index_num][0])
+    output = "You have ordered the {} of the {}".format(sand_num, M[index_num][0])
     print(output)
     # adding the information above into a temporary list, to insert this information into the master list
     temp = [M[index_num][0], M[index_num][1], sand_num]
@@ -120,7 +126,7 @@ def order(O,M, lower, upper):
     return None
 
 
-def review(O,C):
+def review(O, C):
     # doc - typing
     """reviewing the customer's whole order
     :param O: list (my_order)
@@ -148,18 +154,18 @@ def review(O,C):
         message = "You have not yet entered any customer details"
         print(message)
     else:
+        # printing customer details depending on whether the customer has chosen delivery or pick up
         last_item = O[-1]
         if last_item[0] == "Delivery":
+            # printing for delivery (has address as well)
             customer_details = "Delivery for - Name: {}, Phone Number: {}, Address: {}".format(C[0], C[1], C[2])
             print(customer_details)
         elif last_item[0] != "Delivery":
+            # printing for pick up (only phone number and name of customer)
             details = "Pick up for - Name: {}, Phone Number: {} ".format(C[0], C[1])
             print(details)
     print("-" * 80)
     return None
-
-
-
 
 
 def edit_order(O, lower, upper):
@@ -189,6 +195,7 @@ def edit_order(O, lower, upper):
     output_message = "{} has now been changed to {}.".format(old_amount, new_amount)
     print(output_message)
     if new_amount == 0:
+        # removing sandwich from order if customer enters new amount as 0
         sandwich_name = O[my_index][0]
         O.pop(my_index)
         delete_message = "{} has been removed from your order". format(sandwich_name)
@@ -219,11 +226,11 @@ def details(O, C):
     name = get_string("Please enter your name: --> ")
     m = "Please enter your phone number: --> "
     phone_number = phone_integer(m)
-    # adding these inputs into the customer_details list so it can be kept and printed out in the review function
+    # adding these inputs into the customer_details list, so it can be kept and printed out in the review function
     C.append(name)
     C.append(phone_number)
     message = "Enter 'P' to pick up your order, to get your order delivered enter 'D': --> "
-    deliver = confirmation(message, ["P","D"])
+    deliver = confirmation(message, ["P", "D"])
     # checking if they would like pick up or delivery
     if deliver == "P":
         message = "Pick up is free, we'll see you in store later"
@@ -232,7 +239,8 @@ def details(O, C):
         output = "Here are your details - Name: {},   Phone number: {}".format(name, phone_number)
         print(output)
         return None
-    # if they chose delivery then it also asks the user to enter their address and automatically adds $3 to their order total
+    # if they chose delivery then it also asks the user to enter their address
+    # automatically adds $3 to their order total
     elif deliver == "D":
         # showing the user the $3 has been added to their order
         d_message = "Delivery is an extra $3 charge, this will automatically be added to your order total"
@@ -242,10 +250,12 @@ def details(O, C):
         address = input("Please enter an address for delivery: --> ")
         C.append(address)
         # confirming/ letting the user know what their details are that have been recorded
-        output = "Here are your details - Name: {},   Phone number: {},   Address: {}". format(name, phone_number, address)
+        output = "Here are your details - Name: {},   Phone number: {},   Address: {}". format(name, phone_number,
+                                                                                               address)
         print(output)
     else:
         return deliver
+
 
 def extras(E):
     # doc - typing
@@ -261,11 +271,14 @@ def extras(E):
         print(output)
     print("-" * 80)
     return None
+
+
 def add(E, O, lower, upper):
     extras(E)
+    # asking user for input of extras
     a = "Please enter the number of the extra you would like: --> "
     index_num = get_integer(a, lower, upper)
-    num = get_integer("Please enter how many servings of this extra you would like (limit is 5): --> ", 1,5)
+    num = get_integer("Please enter how many servings of this extra you would like (limit is 5): --> ", 1, 5)
     output = "You have added {} of {} to your sandwich".format(num, E[index_num][0])
     print(output)
     # adding the information above into a temporary list, to insert this information into the master list
@@ -273,8 +286,7 @@ def add(E, O, lower, upper):
     O.insert(0, temp)
 
 
-
-def confirm_order(O,C):
+def confirm_order(O, C):
     # doc - typing
     """confirming the order so the next user can start a new one (clears all lists from previously asked inputs)
     :param O: list (my_order)
@@ -282,7 +294,7 @@ def confirm_order(O,C):
     :return: None
     """
     # basically printing a full receipt
-    review(O,C)
+    review(O, C)
     message = "Would you like the confirm your order (enter 'y' for yes or 'n' for no)? --> "
     confirm = confirmation(message)
     if confirm == "Y":
@@ -292,6 +304,7 @@ def confirm_order(O,C):
         C.clear()
     elif confirm == "N":
         return None
+
 
 def input_action():
     # doc -typing
@@ -360,24 +373,33 @@ def main():
             print(m)
         user_choice = input_action()
         if user_choice == "P":
+            # prints sandwich menu
             print_menu(my_list)
         elif user_choice == "O":
+            # initiate order function
             order(my_order, my_list, 0, len(my_list)-1)
         elif user_choice == "R":
+            # printing out the order so far
             review(my_order, customer_details)
         elif user_choice == "E":
+            # user can edit the items they've already ordered (change amounts or remove)
             edit_order(my_order, 0, len(my_order)-1)
         elif user_choice == "D":
+            # user enters their details and chooses delivery or pick up
             details(my_order, customer_details)
         elif user_choice == "C":
+            # user can confirm order, when confirmed it clears the order so a new order can be made
             confirm_order(my_order, customer_details)
         elif user_choice == "A":
+            # extra option to add extra ingredients to their sandwiches (not specified to wat sandwich)
             add(extras, my_order, 0, len(extras)-1)
         elif user_choice == "Q":
+            # whole program stops running
             run = False
             print("Thank you for visiting Marsden's Gourmet Sandwich Bar")
         else:
             print("Unrecognised entry, this is not an option")
     return None
+
 
 main()

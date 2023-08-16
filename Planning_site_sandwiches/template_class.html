@@ -29,6 +29,7 @@
              margin-bottom: 1.2em
     }
 
+
         </style>
 	</head>
 	<body>
@@ -43,6 +44,9 @@
 					<li><a href="#s3">Sprint 3</a></li>
 					<li><a href="#s4">Sprint 4</a></li>
 					<li><a href="#s5">Sprint 5</a></li>
+					<li><a href="#RI">Relevant Implications</a></li>
+					<li><a href="#V">Video</a></li>
+
 				</ul>
 			</div>
 			<div class="content">
@@ -50,7 +54,7 @@
 			
                     
 					<h1>Brief</h1>
-				<h4>To make a program for Marsden Gourmet Sandwich Bar to computerise their phone orders. We want this program to enter customer details, able to order sandwich and allow the customer to be able to choose from pick-up or delivery. After this, the program should be able to display the delivery details, the items ordered and the total cost.</h4>
+				<h4>To make a program for Marsden Gourmet Sandwich Bar to computerise their phone orders. We want this program to enter customer details, able to order sandwich and allow the user to be able to choose from pick-up or delivery. After this, the program should be able to display the delivery details, the items ordered and the total cost.</h4>
 					<hr>
 
     <!-- Heading levels -->
@@ -60,7 +64,7 @@
 
 
 <h1 id = s1>Sprint 1</h1>
-<h3>Aim: Create a basic menu that allows customer to print the menu and quit</h3>
+<h3>Aim: Create a basic menu that allows user to print the menu and quit</h3>
 <h3>Basic program plan</h3>
 <img class="img-responsive fifty" src="assets/img/planning1.png" alt="sprint 1 board">
 
@@ -98,7 +102,7 @@
 				<img class="img-responsive" src="assets/img/sprint2test.png" alt="sprint 2 board">
 <h3>Sprint 2 Board in Progress</h3>
 				<img class="img-responsive" src="assets/img/sprint2board.png" alt="sprint 2 board">
-<h3>Basic Test of Program</h3>
+
 <h3>Sprint Reflection</h3>
 <p>This second sprint has 2 more options in the menu that allows the user to order sandwiches and to review their order. When the
 user chooses the order option they will be asked how many sandwiches they'd like to order, then they will place their order via inputting the index
@@ -106,7 +110,7 @@ number that corresponds with that sandwich. After the customer places their orde
 then the program will print a list of all the sandwiches that the customer has ordered. After the customer has ordered, since the whole option menu
 	is on a loop, this means the user can then choose to review their order. The review order function prints out the number of that sandwich the customer has order,
 	what sandwich they ordered and the price of the sandwich. It also prints the grand total by adding all the prices of how many and what sandwiches the
-	customer ordered. I have added get_string and get_integer functions as well to prevent errors in the future. </p>
+	customer ordered. I have added get_string and get_integer functions as well to prevent errors in the future and to keep the program running smoothly. </p>
 				<h3>Github Push</h3>
 				<img class="img-responsive" src="assets/img/sprint2gitcommit.png" alt="sprint 2 commit">
 
@@ -176,14 +180,14 @@ sandwich_testing file, which is separate from my main code file in order to avoi
 customer to view descriptions of the sandwiches. I also ran into an error, when I developed my review function I wanted it to also print the customer information. Although, if a customer
 	has not yet entered their details then the index number C[0] is out of range because there is not yet anything in the customer_details list. So I had to develop the review function
 	even further and I decided to solve it with an 'if' - where it checked if the customer_details list was empty. I ran into another error when testing the details function - since my delivery or
-	pick up input was not validated so if the customer entered something other that 'P' or 'D' the program would automatically go back to the main menu and didn't add pick up or delivery to the order.
+	pick up input was not validated so if the user entered something other that 'P' or 'D' the program would automatically go back to the main menu and didn't add pick up or delivery to the order.
 	I fixed this by developing my confirmation function and allowing it to adapt to whatever letters I chose to select. I ran into another problem regarding validation, but this time with my integer inputs.
 	In many of my integer inputs I ask them to input a index number, so I had to create validation for this as the user could enter a number that is not in the range of the list indexes. I did this by
 	creating a separate function where their inputs were checked to see if it was lower that the smallest number or higher that the largest number. Then, everytime I asked
 	for an index number input, I would call this function which worked in the favour of functionality and future proofing as well because if I needed to change the code for this
 	validation, I'd only have to change it once in the main index number validation function rather than having lots of separate chunks of code to have to change which would make it messy
-	and not easy to read.
-when </p>
+	and not easy to read. The next step is to polish up all my validation and add another option to the menu to make the program more appealing.
+</p>
 				<h3>Errors</h3>
 								<img class="img-responsive" src="assets/img/sp4error.png" alt="sprint 3 test">
 
@@ -200,11 +204,27 @@ when </p>
                <img class="img-responsive" src="assets/img/s5plan.png" alt="sprint 5 plan 1">
                 <p>Planning the phone number validation and the string validation. I had to make the string validation better because I was getting errors if I didn't input
 					anything and just pressed enter. We want to address the relevant implications of usability and functionality well, so I had to check that the input was a letter
-				especially for if a customer name is asked.</p>
+				especially for if a customer name is asked.
+
+				</p>
+
+					<h4>Phone number validation</h4>
+					<p>
+						I had to modify this function and use .isdigit so that is there is a 0 at the front of the phone number (which is most of the time),
+					it'll be read as a digit and won't get rid of it. This was a more sensible option rather than trying to use one integer validation function
+					for different integer input purposes. This ensured the process is easier and also easier in the future to edit these functions. I also chose to
+					make a separate function. This was a better option because otherwise if I'd used the same validation function for my integer inputs, I wouldn't
+					be able to take phone numbers of longer than 2 digits.</p>
                 </div>
                  <div class="col">
                 <img class="img-responsive"  src="assets/img/s5plan2.png" alt="sprint 5 plan 2">
                 <p>Planning for adding an extras function because I wanted to add a little something extra to advance the services that this sandwich shop had.</p>
+					 <h4>The stucture of this option</h4>
+					 <p>I decided to format and set up this function the same as my ordering sandwich function. This ensured my code would work as my order function was
+					 already running well. I did consider putting this function inside the order function so you could specify what extra you'd like on which sandwich, as
+					 currently the customer is unable to tell the program which extra belongs to which sandwich. But, creating a separate extras list and adding it to the order
+					 list was more simple and the price addition was just as easy. Otherwise, if I were to edit the order function, there is less security in it working without any errors. As
+					 I'd used a method I was comfortable with and had worked with before, this gave extra assurance on the functionality of my this part of my program.</p>
                 </div>
                 </div>
 
@@ -212,6 +232,8 @@ when </p>
 				               <img class="img-responsive" src="assets/img/s5board.png" alt="sprint 5 board in progress">
 
 <h3>Basic Test of Program</h3>
+																<img class="img-responsive" src="assets/img/s5test.png" alt="validation testing">
+
 
 <h3>Sprint Reflection</h3>
 <p>In sprint 5 I have edited my phone number validation so that if the user's phone number starts with a 0, it will count it as a digit. Because, previously my phone number
@@ -225,154 +247,109 @@ I have also been able to add a function to allow the user to add extras like che
 ordering a sandwich, which means I haven't been able to directly associate the extra with a particular sandwich if the user were to order multiple sandwiches. But, in the future I would''ve
 liked to be able to do this as it just adds another level of sophistication to the program. There was also another problem when I was checking through for errors. When I ask for how many of
 an item the customer would like, even if the user inputs 0, the item would still come up on the review receipt even though it doesn't cost any money and the customer didn't even end up ordering it.
-So, since I already had a range for the limit the customer is allowed to order per item, I could just change the lower limit (minimum) so the customer can not enter 0. This demonstrated to me
-that I had addressed my future proofing relevant implication very well as I was able to quickly solve the problem simply by just changing the lowe limit number.</p>
+So, since I already had a range for the limit the customer is allowed to order per item, I could just change the lower limit (minimum) so the user can not enter 0. This demonstrated to me
+that I had addressed my future proofing relevant implication very well as I was able to quickly solve the problem simply by just changing the lower limit number.
+Also, when I tested this program on a real customer (my brother), he asked for 2 sandwiches at once, but when you select order it only allows you to order 1 type of sandwich.
+So, in the future, to further improve this I should add/edit the order function so it asks how many types of sandwiches they'd like to order. I also noticed when I was doing a run through with
+the customer (my brother), even when the order was confirmed and printed out a "thank you" message, it still printed the options menu again. This indicates there is something wrong with my loop,
+so I needed to fix that in the future to polish up this ordering program.</p>
 
 				<h3>Errors</h3>
 								 								<img class="img-responsive" src="assets/img/sp5error.png" alt="sprint 5 error">
 
 				<h3>Github Push</h3>
+												 								<img class="img-responsive" src="assets/img/s5gitpush.png" alt="sprint 5 error">
+
 
 <hr>
 				<h3>Git Commit History</h3>
 				 								<img class="img-responsive" src="assets/img/githistory.png" alt="git commit history">
+				<p>During my project I used GitHub regularly. As a result, I constantly
+committed and pushed my work to ensure the most recent updated version of my project is saved on my project platform. Every time I do a commit, it marks an important update
+of the progress that has been made towards the final project goal. This creates a series of commits resulting in a timeline of my project. Through saving my work onto a separate
+platform, is extra an extra layer of protection ensuring that I won't lose any important code/planning, which is very helpful if my laptop were to be damaged or a glitch were to happen.
+				</p>
 
 
-				<h3>Validation Testing</h3>
+				<h3>Testing</h3>
+												<img class="img-responsive" src="assets/img/testing.png" alt="validation testing">
+
+				<p>I used manually pre-inputted orders to achieve efficiency in my testing</p>
 								<img class="img-responsive" src="assets/img/validationtesting.png" alt="validation testing">
+				<p>In my validation, I created many different functions for each component in the inputs that were required. So I created a different coding
+					page to test all of these functions. For example, the inputs that I had
+				asked for in my program was to enter index numbers, names, letter options from the menu and phone numbers. So, I created a function for each of these
+				and implemented them where they needed to be used. I created separate functions for each of them individually because this meant it would be
+				easier to modify and edit them as I only needed to change it in the function and not go through all of the times I used said validation function
+				and change it as this is not an efficient way to edit the code in the future. </p>
+
+				<h3>Code Checker</h3>
+												<img class="img-responsive" src="assets/img/codechecker.png" alt="validation testing">
+				<p>When I did my final code check, I had many code formatting issues, such as my lines of code being too long (past the margin line) and also not
+				having enough lines inbetween my def functions, so I fixed those small mistakes with ease. But the ones that are shown in this photo I was a little confused by
+					as I had to make all my argument names lower case which was annoying because I had made all my argument names capital letters.
+				When changing these, I made the mistake of not testing the code while changing my code, so I ended up changing all of them at the same time and then there was
+				a massive error at the and so I changed them all back, which wasn't very productive. </p>
+
+
+				<h3>In the future</h3>
+				<p>Due to the time constraints on this project, I was never going complete and execute all the plans I discussed in the project backlog.
+					I needed to prioritise completing components of my program which were essential for it
+to run basically without error. As opposed to other things, which were more "add ons" rather than necessary.
+					Since I focussed on creating components that were essential to address its functionality,
+there are very few problems I can identify. I did have one last thing I wanted to do but it would've taken too long as its complicated. But, when I added my extras
+					they were not specified to a sandwich. For example, if a customer ordered multiple sandwiches and multiple extras, the user is unable to choose
+					what sandwich the extras belong to, this is demonstrated in the test photo above. Consequently, if there was more time to polish up this program and make it more exciting and interesting,
+I would want to create another sprint that addressed this issue, this would give more choice to the customer and allow my program to be functional and usable while
+				taking into account the customers' needs.</p>
 
 <hr>
-				<h1> Relevant Implications Summary</h1>
+				<h1 id = RI> Relevant Implications Summary</h1>
 				<h3>Usability</h3>
 				<p>This relevant implication means that a digital product should be able to diagnose and recover from errors
 				that are present within the code. I have addressed this relevant implication by using sensible validation methods to reduce
 				the number of errors that are able to happen during the program run. An example of this is using the .upper validation so if the
 				user enters a lower case letter rather than the capital letter in the options, it will automatically read the lower case letter as
-				the upper case letter it's supposed to be.</p>
+				the upper case letter it's supposed to be. E.g ['Y' or 'N'] can be inputted as ['y' or 'n'] as well, as a result of this minor validation.
+					of this Furthermore, I have used more validation such as checking for the right characters and if an input is an integer or not.
+					A particular example of this was creating multiple validation functions such as: phone_integer, get_string and get_integer.
+					By using a range limit for the get_integer function, I am able to maximise the efficiency of my program as this prevents the user from
+					entering a number not within the options of the index numbers given for each item. I made it so if they do enter a number
+					that is not in the index number options, it'll notify the user if the number is too high or too low, which means the
+					code can continue running rather than come up with an error.
+				</p>
 
 				<h3>Functionality</h3>
 				<p>Another relevant implication addressed in my sandwich program, is functionality. The definition of this implication is creating a digital
 				product that is able to work efficiently and has minimal bugs/errors or none at all. The product should be able to do its job flawlessly/ with minimal
 				flaws and be able to recognised and identify errors from unexpected inputs. By conducting tests throughout my sprint processes, I have addressed this implication
-				accordingly. I have proven this by taking screenshots of my testing and displaying my written plans on paper of sections of my code.
-					By doing this, I was able to identify errors during each stage of the coding process so that they didn't develop into big problems and make the whole program crash. </p>
+				accordingly. I have proven this by taking screenshots of my testing and displaying my written plans on paper of sections of my code. To further enhance
+					this process, I had test orders already entered into the order list and also printing messages of when a new order starts. This ensured I was able to run my
+					code and test my new function immediately without having to go through the process of ordering a sandwich and entering details, as I had already manually inputted
+					these values in. This saved time and was more efficient in the long run of my testing process.
+					By doing this, I was able to identify errors during each stage of the coding process so that they didn't develop into big problems and make the whole program crash.
+				By also having a separate coding page for testing my functions before integrating it into my full program code, helped me to address any errors
+				that cropped up and change my code accordingly without majorly disrupting the code for my full program. This ensured I had less of a chance to mess up
+				my previously working code. </p>
 
 				<h3>Future Proofing</h3>
 				<p>This implication ensures that a digital product is adaptable and can be updated easily with new features without causing any problems. This means that
 				it should also be easily adaptable if other coders were to make edits. I have addressed this relevant implication through heavily commenting all my code so
-				it's easy to understand </p>
+				it's easy to understand for others who might want to edit the code in the future. I have also been able to add doc - typing which briefly outlines all the components
+				within a function, which again, helps to inform future code editors what each bit of code does and give them a clearer understanding of what is going on. I have also run my program
+					checked for any code errors on the PyCharm code suggestions list and gone through to fix all of them. This meant my coding had appropriate and proper formatting
+					(especially with my indents, spacing and the length of my lines of code). Therefore, making my work easier to read and look familiar to other coders,
+					they are able to make useful and new additions to my work within the same format of my already structured code.</p>
 
 
  <hr>
- <hr>
-
-
-
-    <!-- Paragraphs -->
-    <h3>Example of formatted code</h3>
-	
-                
-
-
-<pre style="font-size: 1.5em;">
-<code class="Python">
-# interesting comment
-def review_fruit(l):
-    for x in l:
-        output = "{:&le; 10} -- {: &gt;4}".format(x[0], x[1])
-        print(output)
-    return None
-</code>
-</pre>
-
-  <h3>Table in case you need</h3>              
-<table class="my-table"><tr><th>Tracks</th><th>Album</th><th>Artist</th></tr><tr><td>Rosalyn</td><td>Night moves</td><td>Bob Seger</td></tr><tr><td>Rock n' Roll Music</td><td>Rock n' Roll Music</td><td>The Beatles</td></tr><tr><td>Roll Over Beethoven</td><td>Rock n' Roll Music</td><td>The Beatles</td></tr><tr><td>Right Down The Lane</td><td>City to City</td><td>Gerry Rafferty</td></tr><tr><td>Ramblin Man</td><td>Brothers and Sister</td><td>The Allman Brothers Band</td></tr><tr><td>Rocket Man (I think it's going to be a long, long time)</td><td>Honky Chateau</td><td>Elton John</td></tr></table>
-                
-            <hr>     
-                
-                <h3>Example paragraph</h3>
-					<p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
-					<hr>
-
-					<!-- Responsive images -->
-					<h3>Example image placements</h3>
-					<p>For images to be responsive (so that they will rescale to suit the width of the parent, use the <code>.img-responsive</code> class.</p>
-					<img class="img-responsive" src="assets/img/place_holder.png" alt="">
-                <hr>
-                <div class="col-container">
-                <div class="col">
-               <img class="img-responsive" src="assets/img/place_holder_sm.jpg" alt="">
-                <p>Ut wisi enim ad minim veniam, <a href="#">quis nostrud exerci tation ullamcorper</a> suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel.</p>
-                </div>
-                 <div class="col">
-                <img class="img-responsive" src="assets/img/place_holder_sm.jpg" alt="">
-                <p>Ut wisi enim ad minim veniam, <a href="#">quis nostrud exerci tation ullamcorper</a> suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel.</p>
-                </div>
-                </div>
-                <hr>
-               
-              
-
-					<!-- Lists -->
-					<h3>Unordered list</h3>
-					<p>Unordered lists are used to markup lists where list items do not require numbering.</p>
-					<ul>
-						<li>Ut wisi enim ad minim veniam</li>
-						<li>Quis nostrud exerci tation</li>
-						<li>Lamcorper suscipit lobortis nis</li>
-						<li>Ut aliquip ex ea commodo consequat</li>
-						<li>Duis autem vel eum iriure dolor</li>
-					</ul>
-					<hr>
-
-					<h3>Ordered list</h3>
-					<p>Ordered lists are used to markup lists where list items require numbering.</p>
-					<ol>
-						<li>Hendrerit in vulputate velit esse</li>
-						<li>Olestie consequat</li>
-						<li>Vel illum dolore eu feugiat</li>
-						<li>Nulla facilisis at vero eros</li>
-						<li>Accumsan et iusto odio</li>
-					</ol>
-					<hr>
-
-					<h3>Unstyled list</h3>
-					<p>You can make the list unstyled using the <code>list-unstyled</code> class.</p>
-					<ul class="list-unstyled">
-						<li>Ut wisi enim ad minim veniam</li>
-						<li>Quis nostrud exerci tation</li>
-						<li>Lamcorper suscipit lobortis nis</li>
-						<li>Ut aliquip ex ea commodo consequat</li>
-						<li>Duis autem vel eum iriure dolor</li>
-					</ul>
-					<hr>
-
-					<h3>Inline list</h3>
-					<p>You can make the list display inline using the <code>list-inline</code> class.</p>
-					<ul class="list-inline">
-						<li>One</li>
-						<li>Two</li>
-						<li>Three</li>
-						<li>Four</li>
-					</ul>
-					<hr>
-
-				
-
-					<h3>Buttons</h3>
-					<p>You can apply the <code>btn</code> class to any element that requires a button style.</p>
-					<p><a href="#" class="btn">Submit</a></p>
-					<hr>
-
-
-
-               
-            
-
-			
-			</div>
-			<div class="footer">
-				&copy; Copyright 2015
+<h3 id = "V">Video run through (with my brother)</h3>
+				<video controls>
+					<source src="assets/IMG_6203.mp4" type="video/mp4">
+				</video>
+				<footer>
+					Copyright Kate Yu
+				</footer>
 			</div>
 		</div>
 	</body>
