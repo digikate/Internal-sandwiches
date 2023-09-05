@@ -297,11 +297,20 @@ def confirm_order(O, C):
     review(O, C)
     message = "Would you like the confirm your order (enter 'y' for yes or 'n' for no)? --> "
     confirm = confirmation(message)
-    if confirm == "Y":
+    if confirm == "Y" and len(O) > 0 and len(C) > 0 :
         print("Your order has been confirmed, thank you for being a customer at Marsden's Gourmet Sandwich Bar. ")
         # clearing next lists so that the next time the option menu shows it's starting a new order
         O.clear()
         C.clear()
+    elif confirm == "Y" and len(O) < 1 and len(C) < 1:
+        print("You haven't placed an order yet and you haven't provided any customer details")
+        return None
+    elif confirm == "Y" and len(O) > 0 and len(C) < 1:
+        print("Please provide your customer details")
+        return None
+    elif confirm == "Y" and len(C) > 0 and len(O) < 1:
+        print("Please provide an order")
+        return None
     elif confirm == "N":
         return None
 
